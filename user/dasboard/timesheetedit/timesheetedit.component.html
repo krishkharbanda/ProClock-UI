@@ -1,0 +1,171 @@
+<mat-progress-bar *ngIf="progressBar" [mode]="'indeterminate'">
+</mat-progress-bar>
+<h1 mat-dialog-title>Update Timesheet</h1>
+<form #updateTimesheet="ngForm" name="updateTimesheet" (ngSubmit)="onSubmitUpdate(updateTimesheet)">
+        <!-- <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                </div>
+                <input required name="startDate" #startDate="ngModel" [(ngModel)]="b"
+                  class="form-control" placeholder="Start Date" type="date">
+            </div>
+            <div *ngIf="startDate.invalid && (startDate.dirty || startDate.touched)" style="color:red">
+                <small *ngIf="startDate.errors.required">
+                    This field is required.
+                </small>
+            </div>
+        </div> -->
+        <!-- <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                </div>
+                <input required name="endDate" #endDate="ngModel" [(ngModel)]="c"
+                  class="form-control" placeholder="End Date" type="date">
+            </div>
+            <div *ngIf="endDate.invalid && (endDate.dirty || endDate.touched)" style="color:red">
+                <small *ngIf="endDate.errors.required">
+                    This field is required.
+                </small>
+            </div>
+        </div> -->
+
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-clock-o"></i> </span>
+                </div>
+                <input required name="monday" #monday="ngModel" [(ngModel)]="d"
+                  class="form-control" placeholder="Monday" type="text">
+            </div>
+            <div *ngIf="monday.invalid && (monday.dirty || monday.touched)" style="color:red">
+                <small *ngIf="monday.errors.required">
+                    This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-clock-o"></i> </span>
+                </div>
+                <input placeholder="Tuesday" class="validate" name="tuesday" #tuesday="ngModel"
+                    [(ngModel)]="e" class="form-control" type="text" required>
+            </div>
+            <div *ngIf="tuesday.invalid && (tuesday.dirty || tuesday.touched)"
+                style="color:red">
+                <small *ngIf="tuesday.errors.required">
+                    This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-clock-o"></i> </span>
+                </div>
+                <input placeholder="Wednesday" class="validate" name="wednesday" #wednesday="ngModel"
+                    [(ngModel)]="f" class="form-control" type="text" required>
+            </div>
+            <div *ngIf="wednesday.invalid && (wednesday.dirty || wednesday.touched)"
+                style="color:red">
+                <small *ngIf="wednesday.errors.required">
+                    This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-clock-o"></i> </span>
+                </div>
+                <input placeholder="Thursday" class="validate" name="thursday" #thursday="ngModel"
+                    [(ngModel)]="g" class="form-control" type="text" required>
+            </div>
+            <div *ngIf="thursday.invalid && (thursday.dirty || thursday.touched)"
+                style="color:red">
+                <small *ngIf="thursday.errors.required">
+                    This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-clock-o"></i> </span>
+                </div>
+                <input placeholder="Friday" class="validate" name="friday" #friday="ngModel"
+                    [(ngModel)]="h" class="form-control" type="text" required>
+            </div>
+            <div *ngIf="friday.invalid && (friday.dirty || friday.touched)"
+                style="color:red">
+                <small *ngIf="friday.errors.required">
+                    This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-clock-o"></i></span>
+                </div>
+                <input placeholder="Saturday" class="validate" name="saturday" #saturday="ngModel"
+                    [(ngModel)]="i" class="form-control" type="text" required>
+            </div>
+            <div *ngIf="saturday.invalid && (saturday.dirty || saturday.touched)"
+                style="color:red">
+                <small *ngIf="saturday.errors.required">
+                    This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-clock-o"></i></span>
+                </div>
+                <input placeholder="Sunday" class="validate" name="sunday" #sunday="ngModel"
+                    [(ngModel)]="j" class="form-control" type="text" required>
+            </div>
+            <div *ngIf="sunday.invalid && (sunday.dirty || sunday.touched)"
+                style="color:red">
+                <small *ngIf="sunday.errors.required">
+                    This field is required.
+                </small>
+            </div>
+        </div>
+        <!-- <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-check"></i></span>
+                </div>
+                <input placeholder="Status" class="validate" name="status" #status="ngModel"
+                    [(ngModel)]="k" class="form-control" type="text" required>
+            </div>
+            <div *ngIf="status.invalid && (status.dirty || status.touched)"
+                style="color:red">
+                <small *ngIf="status.errors.required">
+                    This field is required.
+                </small>
+            </div>
+        </div> -->
+        <!-- <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-pen"></i></span>
+                </div>
+                <input placeholder="Updated Date" class="validate" name="updatedDate" #updatedDate="ngModel"
+                    [(ngModel)]="l" class="form-control" type="text" required>
+            </div>
+            <div *ngIf="updatedDate.invalid && (updatedDate.dirty || updatedDate.touched)"
+                style="color:red">
+                <small *ngIf="updatedDate.errors.required">
+                    This field is required.
+                </small>
+            </div>
+        </div> -->
+    <button class="btn btn-danger" [mat-dialog-close]="">Cancel</button>
+    <button class="btn btn-success" style="float: right"
+            [disabled]='updateTimesheet.pristine || updateTimesheet.invalid' type="submit">Save</button>
+</form>

@@ -1,0 +1,25 @@
+// .sidebar-wrapper {
+//   position: relative;
+//   max-height: none;
+//   min-height: 100%;
+//   overflow: hidden;
+//   width: 260px;
+//   z-index: 4;
+//   box-shadow: inset -1px 0px 0px 0px #DDDDDD;
+// }
+
+a {
+  color: #777777;}
+  a:hover {
+    color: #dc3545;}
+    .navbar-nav li a:focus,.navbar-nav li a i:focus { color:green }
+ 
+hr {
+  margin-top: 0.75rem;
+}
+.nav-link {
+  display: block;
+  padding: 1rem 1rem;
+  cursor: pointer;
+  font-size:0.9rem;
+}

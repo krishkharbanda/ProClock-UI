@@ -1,0 +1,292 @@
+<div class="container-fluid" style="background-color: #f4f3ef;">
+    <div class="row">
+        <div class="col-md-12 text-center ">
+            <nav class="nav-justified">
+                <div class="nav nav-tabs " id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="pop1-tab" data-toggle="tab" href="#pop1" role="tab"
+                        aria-controls="pop1" aria-selected="true">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="card">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="icon-big icon-warning text-center">
+                                                <i class="fa fa-clock-o text-warning" style="font-size: 40px;"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="numbers">
+                                                <p>Pending</p>
+                                                <span>{{dashboardviewList.countOfPendingTimesheets}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a class="nav-item nav-link" id="pop2-tab" data-toggle="tab" href="#pop2" role="tab"
+                        aria-controls="pop2" aria-selected="false">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="card">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="icon-big icon-warning text-center">
+                                                <i class="fa fa-check-square-o text-success"
+                                                   style="font-size: 40px;">
+                                                </i>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="numbers">
+                                                <p>Approved</p>
+                                                <span>{{dashboardviewList.countOfAcceptedTimesheets}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a class="nav-item nav-link" id="pop3-tab" data-toggle="tab" href="#pop3" role="tab"
+                        aria-controls="pop3" aria-selected="false">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="card">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="icon-big icon-warning text-center">
+                                                <i class="fa fa-times text-danger" 
+                                                    style="font-size: 40px;">
+                                                </i>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="numbers">
+                                                <p>Rejected</p>
+                                                <span>{{dashboardviewList.countOfRejectedTimesheets}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="pop1" role="tabpanel" aria-labelledby="pop1-tab">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="col-12 col-md-12" style="display: inline-flex;">
+                                <div class="col-md-9">
+                                    <h4 style="float: left; color: #337ab7;font-weight:600">Pending Time Sheets</h4>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="input-group mb-2 input-group-sm">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Search</span>
+                                        </div>
+                                        <input type="date" placeholder="search" [(ngModel)]="pendingsearchText"
+                                            class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-text">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-sm">
+                                        <thead class="table-active">
+                                            <tr>
+                                                <th>Start date</th>
+                                                <th>End date</th>
+                                                <th>Monday</th>
+                                                <th>Tuesday</th>
+                                                <th>Wednesday</th>
+                                                <th>Thursday</th>
+                                                <th>Friday</th>
+                                                <th>Satuday</th>
+                                                <th>Sunday</th>
+                                                <th>Status</th>
+                                                <th>Updated Date</th>
+                                                <th>Edit</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody
+                                            *ngFor="let user of viewsheet | orderBy: descending | filter:pendingsearchText | paginate: {itemsPerPage:4, currentPage:pending}; let i = index">
+                                            <tr *ngIf="user.refStatus.value==='Pending'">
+                                                <td>{{user.startDate | date:'dd-MM-y'}}</td>
+                                                <td>{{user.endDate | date:'dd-MM-y'}}</td>
+                                                <td>{{user.monday}} Hrs</td>
+                                                <td>{{user.tuesday}} Hrs</td>
+                                                <td>{{user.wednesday}} Hrs</td>
+                                                <td>{{user.thursday}} Hrs</td>
+                                                <td>{{user.friday}} Hrs</td>
+                                                <td>{{user.saturday}} Hrs</td>
+                                                <td>{{user.sunday}} Hrs</td>
+                                                <td>{{user.refStatus.value}}</td>
+                                                <td>{{user.updatedDate | date:'dd-MM-y'}}</td>
+                                                <td>
+                                                    <button type="button"
+                                                        style="height:32px; padding:0px 12px 0px 12px;"
+                                                        class="btn btn-info"
+                                                        (click)="receipt(user, user.id);openEditDialog()">Edit
+                                                    </button>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                    <pagination-controls class="pagination justify-content-end"
+                                        (pageChange)="pending=$event" class="page-item">
+                                    </pagination-controls>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="pop2" role="tabpanel" aria-labelledby="pop2-tab">
+                    <div class="pt-3"></div>
+                    <div class="col-12 col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="col-12 col-md-12" style="display: inline-flex;">
+                                    <div class="col-md-9">
+                                        <h4 style="float: left; color: #337ab7;font-weight:600">Approved Time Sheets
+                                        </h4>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="input-group mb-2 input-group-sm">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Search</span>
+                                            </div>
+                                            <input type="text" placeholder="search" [(ngModel)]="approvedsearchText"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-text">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-sm">
+                                            <thead class="table-active">
+                                                <tr>
+                                                    <th>Start date</th>
+                                                    <th>End date</th>
+                                                    <th>Monday</th>
+                                                    <th>Tuesday</th>
+                                                    <th>Wednesday</th>
+                                                    <th>Thursday</th>
+                                                    <th>Friday</th>
+                                                    <th>Satuday</th>
+                                                    <th>Sunday</th>
+                                                    <th>Status</th>
+                                                    <th>Updated Date</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody
+                                                *ngFor="let user of viewsheet | orderBy: descending | filter:approvedsearchText | paginate: {itemsPerPage:4, currentPage:pending}; let j = index">
+                                                <tr *ngIf="user.refStatus.value==='Approved'">
+                                                    <td>{{user.startDate | date:'dd-MM-y'}}</td>
+                                                    <td>{{user.endDate | date:'dd-MM-y'}}</td>
+                                                    <td>{{user.monday}} Hrs</td>
+                                                    <td>{{user.tuesday}} Hrs</td>
+                                                    <td>{{user.wednesday}} Hrs</td>
+                                                    <td>{{user.thursday}} Hrs</td>
+                                                    <td>{{user.friday}} Hrs</td>
+                                                    <td>{{user.saturday}} Hrs</td>
+                                                    <td>{{user.sunday}} Hrs</td>
+                                                    <td>{{user.refStatus.value}}</td>
+                                                    <td>{{user.updatedDate  | date:'medium'}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <pagination-controls class="pagination justify-content-end"
+                                            (pageChange)="approved=$event" class="page-item">
+                                        </pagination-controls>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="pop3" role="tabpanel" aria-labelledby="pop3-tab">
+                    <div class="pt-3"></div>
+                    <div class="col-12 col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="col-12 col-md-12" style="display: inline-flex;">
+                                    <div class="col-md-9">
+                                        <h4 style="float: left; color: #337ab7;font-weight:600">Rejected Time Sheets
+                                        </h4>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="input-group mb-2 input-group-sm">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Search</span>
+                                            </div>
+                                            <input type="text" placeholder="search" [(ngModel)]="rejectedsearchText"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-text">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-sm">
+                                            <thead class="table-active">
+                                                <tr>
+                                                    <th>Start dates</th>
+                                                    <th>End date</th>
+                                                    <th>Monday</th>
+                                                    <th>Tuesday</th>
+                                                    <th>Wednesday</th>
+                                                    <th>Thursday</th>
+                                                    <th>Friday</th>
+                                                    <th>Satuday</th>
+                                                    <th>Sunday</th>
+                                                    <th>Status</th>
+                                                    <th>Updated date</th>
+                                                    <th>Edit</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody
+                                                *ngFor="let user of viewsheet | orderBy: descending | filter:rejectedsearchText | paginate: {itemsPerPage:4, currentPage:pending}; let k = index">
+                                                <tr *ngIf="user.refStatus.value==='Rejected'">
+                                                    <td>{{user.startDate | date:'dd-MM-y'}}</td>
+                                                    <td>{{user.endDate | date:'dd-MM-y'}}</td>
+                                                    <td>{{user.monday}} Hrs</td>
+                                                    <td>{{user.tuesday}} Hrs</td>
+                                                    <td>{{user.wednesday}} Hrs</td>
+                                                    <td>{{user.thursday}} Hrs</td>
+                                                    <td>{{user.friday}} Hrs</td>
+                                                    <td>{{user.saturday}} Hrs</td>
+                                                    <td>{{user.sunday}} Hrs</td>
+                                                    <td>{{user.refStatus.value}}</td>
+                                                    <td>{{user.updatedDate  | date:'medium'}}</td>
+                                                    <td>
+
+                                                        <button type="button"
+                                                            (click)="receipt(user);openEditDialog()"
+                                                            style="height:32px; padding:0px 12px 0px 12px;"
+                                                            class="btn btn-info">
+                                                            Edit
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <pagination-controls class="pagination justify-content-end"
+                                            (pageChange)="rejected=$event" class="page-item">
+                                        </pagination-controls>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

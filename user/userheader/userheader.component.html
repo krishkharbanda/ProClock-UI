@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg navbar-default">
+    <div style="margin-left: 1%">
+        <a class="navbar-brand" (click)="sidenav.toggle()"><i class="fa fa-bars"
+                style="color:#337ab7;font-size:24px"></i></a>
+        <a class="navbar-brand">
+            <img src="../assets/img/logo_3.jfif" alt="Logo" style="width:40px;">
+            ProClock
+        </a>
+        <!-- <a class="navbar-brand" style="padding-bottom: 9px"> Time Sheet</a> -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <!-- <li class="nav-item">
+                <a class="nav-link" [routerLink]="'/changepsd'"><i class="fa fa-sign-out"></i>
+                    Change Password</a>
+            </li> -->
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="'/login'" (click)="refresh()"><i class="fa fa-sign-out"></i>
+                    Logout</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"><i class="fa fa-user"></i> {{ firstname }} {{ lastname }} </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<mat-sidenav-container style="border: 0px 1px 0px 0px solid #ddd;">
+    <mat-sidenav #sidenav mode="side" opened="false">
+        <app-sidebar></app-sidebar>
+    </mat-sidenav>
+    <router-outlet></router-outlet>
+</mat-sidenav-container>
+<app-footer></app-footer>

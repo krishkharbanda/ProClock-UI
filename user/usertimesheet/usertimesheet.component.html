@@ -1,0 +1,281 @@
+<div class="container-fluid" style="background-color: #f4f3ef;">
+  <!-- (ngSubmit)="OnSubmit(userTimeForm)" -->
+  <div class="row">
+    <div class="col-lg-2 col-md-2 col-sm-2" style="margin-top:20px;">
+      <button [disabled]="previousbuttondisable" (click)="decrement()" type="button" class="btn btn-secondary"> <span
+          class="fa fa-chevron-left"></span> Previous
+      </button>
+    </div>
+    <div class="col-lg-8 col-md-8 col-sm-8" style="margin-top:20px; text-align:center">
+      <!-- <span> <strong>{{weekfirstday | date:"mediumDate"}} </strong></span> to <span> <strong>{{weekseventhday | date:"mediumDate"}} </strong></span> -->
+      <!-- <h5> {{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h5> -->
+      <!-- <p>
+          <strong> Date span
+            <span><input style="width: 156px;" type="date" class="form-control" value="date" class="validate"
+                name="startDate" #startDate [(ngModel)]="usertimepost.startDate" required /></span>
+            to
+            <span><input style="width: 156px;" type="date" class="form-control" value="date" class="validate"
+                name="endDate" #endDate [(ngModel)]="usertimepost.endDate" required /></span>
+          </strong>
+        </p> -->
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2" style="margin-top:20px; text-align:right">
+      <button (click)="increment()" [disabled]="buttondisable" type="button" class="btn btn-secondary">
+        Next <span class="fa fa-chevron-right"></span>
+      </button>
+    </div>
+  </div>
+
+  <form #userTimeForm="ngForm" name="userTimeForm">
+    <div class="row" *ngIf="entertimesheetpresentweek">
+      <div class="col-12 col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <!-- <h4 class="card-title">Time Sheet</h4> -->
+            <h5 class="card-title" style="text-align: center; color:#337ab7"> <span>
+                <strong>{{weekfirstday | date:"mediumDate"}} </strong></span> - <span>
+                <strong>{{weekseventhday | date:"mediumDate"}} </strong></span></h5>
+            <!-- <form action="" class="search-form">
+              <div class="form-group has-feedback"
+                style="margin-bottom: 10px;margin-top: -41px;margin-left: 56px !important;margin-right: 51px;">
+                <label for="search" class="sr-only">Search</label>
+                <input type="text" class="form-control" name="search" id="search" placeholder="search">
+                <i class="fa fa-search searchvalue"></i>
+              </div>
+            </form> -->
+            <div class="card-text">
+              <div class="table-responsive">
+                <table class="table table-bordered table-sm">
+                  <thead class="table-active">
+                    <tr>
+                      <!-- {{ activeDayIsOpen | date:'EEEE, d'}}{{ viewDate | date:'EEEE, d'}} -->
+                      <td>Project Name</td>
+                      <td>{{weekfirstday | date:'EEE, M/d'}}</td>
+                      <td>{{weeksecondday | date:'EEE, M/d'}}</td>
+                      <td>{{weekthirdday | date:'EEE, M/d'}}</td>
+                      <td>{{weekfourthday | date:'EEE, M/d'}}</td>
+                      <td>{{weekfifthday | date:'EEE, M/d'}}</td>
+                      <td>{{weeksixday | date:'EEE, M/d'}}</td>
+                      <td>{{weekseventhday | date:'EEE, M/d'}}</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <select class="form-control" #projectName="ngModel" class="validate"
+                          (change)="selectedCompanyId()" name="projectName" [(ngModel)]="selectedOption" required>
+                          <option [ngValue]="undefined" disabled>Select projectName </option>
+                          <option *ngFor="let project of projectlist" [ngValue]="project">
+                            {{project.projectName}}
+                          </option>
+                        </select>
+                        <div *ngIf="projectName.invalid && (projectName.dirty || projectName.touched)"
+                          style="color:red">
+                          <small *ngIf="projectName.errors.required">
+                            Please select the any field.
+                          </small>
+                        </div>
+                      </td>
+                      <td>
+                        <input class="validate" name="monday" #monday="ngModel" [(ngModel)]="usertimepost.monday"
+                          class="form-control" placeholder="0" type="number" min=0 max=24 required
+                          pattern="([01]?[0-9]|2[0-4])"> Hours
+                        <div style="color:red" *ngIf="monday.invalid && (monday.dirty || monday.touched)">
+                          <small *ngIf="monday.errors && monday.errors.required">
+                            Time is required
+                          </small>
+                          <small *ngIf="monday.errors && monday.errors.pattern">
+                            No of hours 24 max
+                          </small>
+                        </div>
+                      </td>
+                      <td>
+                        <input class="validate" name="tuesday" #tuesday="ngModel" [(ngModel)]="usertimepost.tuesday"
+                          class="form-control" placeholder="0" type="number" min=0 max=24 required
+                          pattern="([01]?[0-9]|2[0-4])"> Hours
+                        <div style="color:red" *ngIf="tuesday.invalid && (tuesday.dirty || tuesday.touched)">
+                          <small *ngIf="tuesday.errors && tuesday.errors.required">
+                            Time is required
+                          </small>
+                          <small *ngIf="tuesday.errors && tuesday.errors.pattern">
+                            No of hours 24 max
+                          </small>
+                        </div>
+                      </td>
+
+                      <td>
+                        <input class="validate" name="wednesday" #wednesday="ngModel"
+                          [(ngModel)]="usertimepost.wednesday" class="form-control" placeholder="0" type="number"
+                          min=0 max=24 required pattern="([01]?[0-9]|2[0-4])"> Hours
+                        <div style="color:red" *ngIf="wednesday.invalid && (wednesday.dirty || wednesday.touched)">
+                          <small *ngIf="wednesday.errors && wednesday.errors.required">
+                            Time is required
+                          </small>
+                          <small *ngIf="wednesday.errors && wednesday.errors.pattern">
+                            No of hours 24 max
+                          </small>
+                        </div>
+                      </td>
+
+                      <td>
+                        <input class="validate" name="thursday" #thursday="ngModel" [(ngModel)]="usertimepost.thursday"
+                          class="form-control" placeholder="0" type="number" min=0 max=24 required
+                          pattern="([01]?[0-9]|2[0-4])"> Hours
+                        <div style="color:red" *ngIf="thursday.invalid && (thursday.dirty || thursday.touched)">
+                          <small *ngIf="thursday.errors && thursday.errors.required">
+                            Time is required
+                          </small>
+                          <small *ngIf="thursday.errors && thursday.errors.pattern">
+                            No of hours 24 max
+                          </small>
+                        </div>
+                      </td>
+                      <td>
+                        <input class="validate" name="friday" #friday="ngModel" [(ngModel)]="usertimepost.friday"
+                          class="form-control" placeholder="0" type="number" min=0 max=24 required
+                          pattern="([01]?[0-9]|2[0-4])"> Hours
+                        <div style="color:red" *ngIf="friday.invalid && (friday.dirty || friday.touched)">
+                          <small *ngIf="friday.errors && friday.errors.required">
+                            Time is required
+                          </small>
+                          <small *ngIf="friday.errors && friday.errors.pattern">
+                            No of hours 24 max
+                          </small>
+                        </div>
+                      </td>
+                      <td>
+                        <input class="validate" name="saturday" #saturday="ngModel" [(ngModel)]="usertimepost.saturday"
+                          class="form-control" placeholder="0" type="number" min=0 max=24 required
+                          pattern="([01]?[0-9]|2[0-4])"> Hours
+                        <div style="color:red" *ngIf="saturday.invalid && (saturday.dirty || saturday.touched)">
+                          <small *ngIf="saturday.errors && saturday.errors.required">
+                            Time is required
+                          </small>
+                          <small *ngIf="saturday.errors && saturday.errors.pattern">
+                            No of hours 24 max
+                          </small>
+                        </div>
+                      </td>
+
+                      <td>
+                        <input class="validate" name="sunday" #sunday="ngModel" [(ngModel)]="usertimepost.sunday"
+                          class="form-control" placeholder="0" type="number" min="0" max="24" required
+                          pattern="([01]?[0-9]|2[0-4])"> Hours
+                        <div style="color:red" *ngIf="sunday.invalid && (sunday.dirty || sunday.touched)">
+                          <small *ngIf="sunday.errors && sunday.errors.required">
+                            Time is required
+                          </small>
+                          <small *ngIf="sunday.errors && sunday.errors.pattern">
+                            No of hours 24 max
+                          </small>
+                        </div>
+                      </td>
+                      <!-- <td><input type="number" placeholder=0 min=0 max=12 onKeyDown="return false" value=0 class="form-control"  class="validate" name="tuesday"
+                          #tuesday [(ngModel)]="usertimepost.tuesday" required /><label> Hours</label></td> -->
+                    </tr>
+                    <tr>
+                      <td colspan="6">Total Hours</td>
+                      <!-- <td colspan="2">{{totaltime}}</td> -->
+                      <td colspan="2">{{totaltime}}
+                        {{usertimepost.monday+usertimepost.tuesday+usertimepost.wednesday+usertimepost.thursday+usertimepost.friday+usertimepost.saturday+usertimepost.sunday}}
+                        Hours
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-12 col-sm-12" style="padding-bottom: 20px">
+        <div style="margin-top:20px; text-align:center">
+          <button [disabled]='userTimeForm.pristine || userTimeForm.invalid' (click)="OnSubmit(userTimeForm)"
+            type="button" class="btn btn-primary">
+            <!-- [disabled]="!userTimeForm.valid" -->
+            Save
+          </button>
+          <!-- <button type="button" class="btn btn-secondary" style="margin-left: 20px">Submit</button> -->
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- <div *ngIf="viewtimesheetbyweek==false || entertimesheetpresentweek==false">
+  their no data for this week
+</div> -->
+<div class="container-fluid" style="background-color: #f4f3ef;" *ngIf="viewtimesheetbyweek">
+  <div class="row" style="background-color: #f4f3ef; margin-bottom: 70px">
+    <!-- <div class="col-md-12">
+      <div class="col-lg-2 col-md-2 col-sm-2" style="margin-top:20px;">
+      </div>
+      <div class="col-lg-8 col-md-8 col-sm-8" style="margin-top:20px; text-align:center">
+        <p>
+          <strong> Time span
+            <span></span>
+            to
+            <span></span>
+          </strong>
+        </p>
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-2" style="margin-top:20px; text-align:right">
+      </div>
+    </div> -->
+    <div class="col-12 col-md-12" *ngFor="let user of viewsheet">
+      <div class="card"
+        *ngIf="(second | date:'mediumDate') === (user.startDate | date:'mediumDate') || (first | date:'mediumDate') === (user.startDate | date:'mediumDate')">
+        <div class="card-body">
+          <h5 class="card-title" style="text-align: center"><b>{{user.startDate | date:'mediumDate'}} -
+              {{user.endDate | date:'mediumDate'}}</b></h5>
+          <!-- <form action="" class="search-form">
+              <div class="form-group has-feedback"
+                style="margin-bottom: 10px;margin-top: -41px;margin-left: 56px !important;margin-right: 51px;">
+                <label for="search" class="sr-only">Search</label>
+                <input type="date" class="form-control" name="search" id="search" placeholder="search">
+                <i class="fa fa-search searchvalue"></i>
+              </div>
+            </form> -->
+          <div class="card-text">
+            <div class="table-responsive">
+              <table class="table table-bordered table-sm">
+                <thead class="table-active">
+                  <tr>
+                    <th>Project name</th>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                    <th>Saturday</th>
+                    <th>Sunday</th>
+                    <!-- <th>Start</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{user.project.projectName}}</td>
+                    <td>{{user.monday}}</td>
+                    <td>{{user.tuesday}}</td>
+                    <td>{{user.wednesday}}</td>
+                    <td>{{user.thursday}}</td>
+                    <td>{{user.friday}}</td>
+                    <td>{{user.saturday}}</td>
+                    <td>{{user.sunday}}</td>
+                    <!-- <td>{{user.startDate | date:'mediumDate'}} - {{user.endDate | date:'mediumDate'}}</td> -->
+                  </tr>
+                  <tr>
+                    <td colspan="6">Total Hours</td>
+                    <td colspan="2">
+                      {{user.monday + user.tuesday + user.wednesday + user.thursday+user.friday + user.saturday + user.sunday}}hrs
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

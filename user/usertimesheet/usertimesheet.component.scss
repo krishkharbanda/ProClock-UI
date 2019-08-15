@@ -1,0 +1,139 @@
+.card {
+    border-radius: 6px;
+    box-shadow: 0 2px 2px rgba(204, 197, 185, 0.5);
+    background-color: #FFFFFF;
+    color: #252422;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    position: relative;
+    z-index: 1;
+}
+.card .content {
+    padding: 15px 15px 10px 15px;
+}
+.card .numbers p {
+    margin: 0;
+}
+.card .numbers {
+    font-size: 2em;
+    text-align: right;
+}
+p {
+    font-size: 16px;
+    line-height: 1.4em;
+}
+thead tr td{
+    color:#fff;
+}
+table{text-align: center}
+
+
+.search-form .form-group {
+    float: right !important;
+    transition: all 0.35s, border-radius 0s;
+    width: 32px;
+    height: 32px;
+    background-color: #fff;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    border-radius: 25px;
+    border: 1px solid #ccc;
+  }
+  .search-form .form-group input.form-control {
+    padding: 13px 0px 30px 29px;
+    border: 0 none;
+    background: transparent;
+    box-shadow: none;
+    display:block;
+  }
+  .search-form .form-group input.form-control::-webkit-input-placeholder {
+    display: none;
+  }
+  .search-form .form-group input.form-control:-moz-placeholder {
+    /* Firefox 18- */
+    display: none;
+  }
+  .search-form .form-group input.form-control::-moz-placeholder {
+    /* Firefox 19+ */
+    display: none;
+  }
+  .search-form .form-group input.form-control:-ms-input-placeholder {
+    display: none;
+  }
+  .search-form .form-group:hover,
+  .search-form .form-group.hover {
+    width: 25%;
+    border-radius: 4px 25px 25px 4px;
+  }
+  .search-form .form-group span.form-control-feedback {
+    position: absolute;
+    top: -1px;
+    right: -2px;
+    z-index: 2;
+    display: block;
+    width: 34px;
+    height: 34px;
+    line-height: 34px;
+    text-align: center;
+    color: #3596e0;
+    left: initial;
+    font-size: 14px;
+  }
+
+  i{
+
+    top: -42px !important;
+    position: relative;
+    left: 8px;
+
+  }
+  .searchvalue[_ngcontent-c6] {
+    top: 26px !important;
+    position: absolute;
+    left: 961px;
+    color: #6c757d;
+}
+
+thead[_ngcontent-c6] tr[_ngcontent-c6] td[_ngcontent-c6] {
+  color: #868685;
+}
+thead[_ngcontent-c9] tr[_ngcontent-c9] td[_ngcontent-c9] {
+   color: rgba(0,0,0,.9);
+}
+.active {
+  color: red;
+}
+
+input[_ngcontent-c6] {
+  overflow: visible;
+  /* width: 48px; */
+  text-align: center;
+}
+
+thead[_ngcontent-c15] tr[_ngcontent-c15] td[_ngcontent-c15] {
+  color: #000;
+}
+thead[_ngcontent-c6][_ngcontent-c6] tr[_ngcontent-c6][_ngcontent-c6] td[_ngcontent-c6][_ngcontent-c6] {
+  color: #000000;
+}
+thead[_ngcontent-c11] tr[_ngcontent-c11] td[_ngcontent-c11] {
+  color: #000;
+}
+
+.tsts{
+  display: none;
+}
+.active{
+  display: block;
+}
+
+.without_ampm::-webkit-datetime-edit-ampm-field {
+  display: none;
+}
+input[type=time]::-webkit-clear-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  -ms-appearance:none;
+  appearance: none;
+  margin: -10px; 
+}
