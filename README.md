@@ -1,4 +1,6 @@
-# ProClock
+# ProClock-UI
+
+This is the UI for ProClock, an innovative timesheet application allowing seamless logging and instant updates.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.2.
 
